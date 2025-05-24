@@ -1,13 +1,10 @@
 import { Client } from 'pg';
+import fs from 'fs'
+const dbconfig = JSON.parse(fs.readFileSync('./dbconfig.json'))
+console.log(dbconfig)
 
 export default async () => {
-  const client = new Client({
-    user: 'postgres',
-    password: 'postgres',
-    host: 'localhost',
-    port: '5432',
-    database: 'demo_2025',
-  });
+  const client = new Client(dbconfig);
 
   await client.connect();
   return client;
