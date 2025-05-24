@@ -12,6 +12,10 @@ DROP TABLE IF EXISTS products CASCADE;
 
 DROP TABLE IF EXISTS partner_products CASCADE;
 
+DROP TYPE IF EXISTS organization_type CASCADE;
+
+CREATE TYPE public.organization_type AS ENUM ('ЗАО', 'ОАО', 'ООО', 'ПАО');
+
 CREATE TABLE
     public.material_type (
         id bigserial NOT NULL,
