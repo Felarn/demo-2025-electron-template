@@ -1,3 +1,62 @@
 .logo {
   width: 200px;
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.space-betwen {
+  justify-content: space-between;
+}
+
+label {}
+
+h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F4E8D3;
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 3px;
+  border-color: #67BA80;
+  margin: 5px;
+  padding: 5px;
+}
+
+.button:hover {
+  background-color: wheat;
+  box-shadow: 0px 0px 5px inset greenyellow;
+}
+
+.partner-list {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.card {
+  min-width: 400;
+  width: 800;
+  max-width: 1200;
+}
