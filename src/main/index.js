@@ -5,7 +5,6 @@ import icon from '../../resources/logo.png?asset';
 
 import connectDB from './db';
 import { console } from 'inspector';
-import { text } from 'stream/consumers';
 
 
 async function sendParthners(e) {
