@@ -58,6 +58,7 @@ export default function PartnerEditor() {
         />
         <label htmlFor="email">Электронная почта</label>
         <input required id="email" type="email" defaultValue={partner.email ?? ''} />
+        
         <label htmlFor="phone">Номер телефона</label>
         <input required id="phone" type="tel" defaultValue={partner.phone ?? ''} />
 

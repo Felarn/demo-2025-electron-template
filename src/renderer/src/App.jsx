@@ -9,14 +9,8 @@ function App() {
   const [partners, setPartners] = useState([]);
 
   useEffect(() => {
-    // (async (data="test") => await window.api.foo(data))()
-    window.api.getAllPartners().then((data) => setPartners(JSON.parse(data)));
+    window.api.getAllPartners().then(setPartners);
   }, []);
-
-  const handleClick = async () => {
-    const reply = JSON.parse(await window.api.poke());
-    console.log(reply);
-  };
 
   const redirEditPartner = (partner) => () => {
     navigate('/edit-partner', { state: { partner, action: 'edit' } });

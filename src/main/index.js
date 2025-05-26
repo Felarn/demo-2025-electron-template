@@ -7,43 +7,36 @@ import connectDB from './db';
 import { console } from 'inspector';
 import { text } from 'stream/consumers';
 
-async function foo(event, data) {
+
+async function sendParthners(e) {
   try {
-    console.log(data);
-    dialog.showMessageBox({ message: JSON.stringify(data) });
-  } catch (e) {
-    dialog.showErrorBox('Ошибка', e.stack);
-  }
-}
-async function sendParthners(e, data) {
-  try {
-    // const partners = await global.dbclient.query('SELECT * FROM partners');
     const partners = await global.dbclient.query(
       `SELECT 
-	partn.id, partn.name, partn.type, partn.director, partn.email, partn.phone, partn.address, partn.tin, partn.rating, 
-	coalesce(sum(prod.product_quantity),0) AS total_sold 
-FROM 
-	partners as partn 
-LEFT OUTER JOIN 
-	partner_products AS prod 
-ON 
-	partn.id=prod.partner_id 
-GROUP BY partn.id 
-ORDER BY partn.id;`);
-    const partnersWithDiscount = partners.rows.map(partner => {
+        partn.id, partn.name, partn.type, partn.director, partn.email, partn.phone, partn.address, partn.tin, partn.rating, 
+        coalesce(sum(prod.product_quantity),0) AS total_sold 
+      FROM 
+        partners as partn 
+      LEFT OUTER JOIN 
+        partner_products AS prod 
+      ON 
+        partn.id=prod.partner_id 
+      GROUP BY partn.id 
+      ORDER BY partn.id;`
+    );
+
+    const partnersWithDiscount = partners.rows.map((partner) => {
       if (partner.total_sold > 3e5) {
-        partner.discount = 15
+        partner.discount = 15;
       } else if (partner.total_sold > 5e4) {
-        partner.discount = 10
+        partner.discount = 10;
       } else if (partner.total_sold > 1e4) {
-        partner.discount = 5
+        partner.discount = 5;
       } else {
-        partner.discount = 0
+        partner.discount = 0;
       }
-      return partner
-    })
-    // dialog.showMessageBox({ message: JSON.stringify(partners.rows) })
-    return JSON.stringify(partnersWithDiscount);
+      return partner;
+    });
+    return partnersWithDiscount;
   } catch (e) {
     dialog.showErrorBox(
       'Ошибка при попытке получить список партнеров: ',
@@ -58,7 +51,8 @@ async function editPartner(e, partner) {
     const partners = await global.dbclient.query(
       `UPDATE partners 
         SET 
-          name=$1, type=$2, director=$3, email=$4, phone=$5, address=$6, tin=$7, rating=$8
+          name=$1, type=$2, director=$3, email=$4, 
+          phone=$5, address=$6, tin=$7, rating=$8
         WHERE id=$9;`,
       [name, type, director, email, phone, address, tin, rating, id]
     );
@@ -95,7 +89,7 @@ async function addPartner(e, partner) {
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 1500,
+    width: 1000,
     height: 900,
     show: false,
     autoHideMenuBar: true,
@@ -126,7 +120,6 @@ app.whenReady().then(async () => {
   electronApp.setAppUserModelId('com.electron');
 
   global.dbclient = await connectDB();
-  ipcMain.handle('poke', foo);
   ipcMain.handle('getAllPartners', sendParthners);
   ipcMain.handle('addPartner', addPartner);
   ipcMain.handle('editPartner', editPartner);
