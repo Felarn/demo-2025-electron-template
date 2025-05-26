@@ -68,6 +68,7 @@ h4 {
   min-width: 400px;
   width: 500px;
   max-width: 800px;
+  position: relative;
 }
 
 .frame {
@@ -110,4 +111,22 @@ input:invalid {
 
 .big-text-box {
   height: 8em;
+}
+
+.remove-btn {
+
+  border: solid crimson 1px;
+  border-radius: 2px;
+  padding: 0px 2px 2px 5px;
+  position: absolute;
+  color: crimson;
+  bottom: 5px;
+  right: 5px;
+}
+
+.remove-btn:hover {
+  background-color: pink;
+  color: rgb(125, 0, 0);
+  user-select: none;
+  /* font-weight: bold; */
 }

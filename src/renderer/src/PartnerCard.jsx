@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default function ({ partner, onClick }) {
+export default function ({ partner, onClick, onDelete}) {
+
   const {
     id,
     name,
@@ -29,6 +30,9 @@ export default function ({ partner, onClick }) {
       </div>
       <div>
         <span className="bold">Рейтинг:</span> {` ${rating}⭐`}
+      </div>
+      <div className='remove-btn' onClick={onDelete(partner)}>
+        Удалить партнера ❌      
       </div>
     </div>
   );

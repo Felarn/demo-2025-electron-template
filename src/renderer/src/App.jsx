@@ -20,13 +20,18 @@ function App() {
     navigate('/create-partner', { state: { partner: {}, action: 'create' } });
   };
 
+  const handleDeletePartner = (partner) => (e)=>{
+    e.stopPropagation();
+    window.api.deletePartner(partner).then(window.api.getAllPartners().then(setPartners));
+  }
+
   return (
     <>
       <div className="flex-column">
         <img alt="logo" className="logo" src={logo} />
         <h1>Список партнеров</h1>
         <div className="partner-list frame">
-          <div className="button text-center" onClick={redirCreatePartner}>
+          <div className="button text-center" onClick={redirCreatePartner} >
             <h3>➕ Добавить нового партнера</h3>
           </div>
           {partners.map((partner) => {
@@ -34,6 +39,7 @@ function App() {
               <PartnerCard
                 partner={partner}
                 onClick={redirEditPartner(partner)}
+                onDelete={handleDeletePartner}
               />
             );
           })}

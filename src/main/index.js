@@ -86,6 +86,22 @@ async function addPartner(e, partner) {
   }
 }
 
+async function deletePartner(e, { id, name }) {
+  try {
+    const partners = await global.dbclient.query(
+      `DELETE FROM partners WHERE id=$1`, [id]
+    );
+    dialog.showMessageBox({
+      message: `Партнер "${name}" успешно удален`,
+    });
+  } catch (e) {
+    dialog.showErrorBox(
+      'Ошибка при попытке удалить партнера: ',
+      e.stack
+    );
+  }
+}
+
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1000,
@@ -122,6 +138,7 @@ app.whenReady().then(async () => {
   ipcMain.handle('getAllPartners', sendParthners);
   ipcMain.handle('addPartner', addPartner);
   ipcMain.handle('editPartner', editPartner);
+  ipcMain.handle('deletePartner', deletePartner);
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window);
