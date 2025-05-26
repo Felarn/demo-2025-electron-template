@@ -37,11 +37,9 @@ export default function PartnerEditor() {
 
   document.title = pageDescription;
   return (
-    <div>
+    <div className='flex-column'>
       <h1>{pageDescription}</h1>
-      <form action="" className="flex-column" onSubmit={handleSubmit}>
-        <label htmlFor="name">Наименование партнера</label>
-        <input id="name" type="text" defaultValue={partner.name ?? ''} />
+      <form action="" className="flex-column frame" onSubmit={handleSubmit}>
         <label htmlFor="type">Тип предприятия</label>
         <select name="" id="type" defaultValue={partner.type ?? 'ООО'}>
           <option value="ЗАО">ЗАО</option>
@@ -49,26 +47,32 @@ export default function PartnerEditor() {
           <option value="ООО">ООО</option>
           <option value="ПАО">ПАО</option>
         </select>
+        <label htmlFor="name">Наименование партнера</label>
+        <input required id="name" type="text" defaultValue={partner.name ?? ''} />
+
         <label htmlFor="director">ФИО директора</label>
-        <input
+        <input required
           id="director"
           type="text"
           defaultValue={partner.director ?? ''}
         />
         <label htmlFor="email">Электронная почта</label>
-        <input id="email" type="text" defaultValue={partner.email ?? ''} />
+        <input required id="email" type="email" defaultValue={partner.email ?? ''} />
         <label htmlFor="phone">Номер телефона</label>
-        <input id="phone" type="text" defaultValue={partner.phone ?? ''} />
-        <label htmlFor="address">Юридический адрес</label>
-        <input id="address" type="text" defaultValue={partner.address ?? ''} />
+        <input required id="phone" type="tel" defaultValue={partner.phone ?? ''} />
+
+        <label htmlFor="address " >Юридический адрес</label>
+        <textarea required id="address" className='big-text-box' type="text" defaultValue={partner.address ?? ''} />
+
         <label htmlFor="tin">ИНН партнера</label>
-        <input id="tin" type="text" defaultValue={partner.tin ?? ''} />
+        <input required id="tin" type="number" defaultValue={partner.tin ?? ''} />
+        
         <label htmlFor="rating">Рейтинг</label>
-        <input id="rating" type="text" defaultValue={partner.rating ?? ''} />
+        <input required  id="rating" type="number" min="0" max="10" defaultValue={partner.rating ?? ''} />
 
         <button className="button">{submitButtonDescription}</button>
       </form>
-      <button className="button" onClick={() => navigate('/')}>
+      <button className="button back-button" onClick={() => navigate('/')}>
         ⬅ К списку партнеров
       </button>
     </div>

@@ -31,7 +31,7 @@ function App() {
       <div className="flex-column">
         <img alt="logo" className="logo" src={logo} />
         <h1>Список партнеров</h1>
-        <div className="partner-list">
+        <div className="partner-list frame">
           <div className="button text-center" onClick={redirCreatePartner}>
             <h3>➕ Добавить нового партнера</h3>
           </div>
