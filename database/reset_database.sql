@@ -67,13 +67,13 @@ CREATE TABLE
     );
 
 ALTER TABLE IF EXISTS public.partner_products
-ADD CONSTRAINT partner_products_partner_id_fkey FOREIGN KEY (partner_id) REFERENCES public.partners (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION;
+ADD CONSTRAINT partner_products_partner_id_fkey FOREIGN KEY (partner_id) REFERENCES public.partners (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE;
 
 ALTER TABLE IF EXISTS public.partner_products
-ADD CONSTRAINT partner_products_produckt_id_fkey FOREIGN KEY (product_id) REFERENCES public.products (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION NOT VALID;
+ADD CONSTRAINT partner_products_produckt_id_fkey FOREIGN KEY (product_id) REFERENCES public.products (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE NOT VALID;
 
 ALTER TABLE IF EXISTS public.products
-ADD CONSTRAINT product_type_id FOREIGN KEY (product_type_id) REFERENCES public.product_type (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION NOT VALID;
+ADD CONSTRAINT product_type_id FOREIGN KEY (product_type_id) REFERENCES public.product_type (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE NOT VALID;
 
 END;
 
